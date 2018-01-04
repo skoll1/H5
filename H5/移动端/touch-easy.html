@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size:11.3px">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+
+		.picture{
+			opacity: 0;
+
+		}
+		#ok{
+			width: 300px;
+			height: 300px;
+			font-size:2rem;
+			background: red;
+			color:#fff;
+			position: absolute;
+			left:50%;
+			/*top: 50%;*/
+			margin-left: -150px;
+			/*margin-top: -150px;*/
+		}
+		.end{
+			background-color: blue;
+		}
+		.move{
+			background-color: red;
+		}
+		.change{
+			transition: opacity 0.3s ease;
+			opacity: 1;
+		}
+		.none{
+			transition: opacity 0.3s ease;
+			opacity: 0;
+		}
+		.ball{
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			background-color: yellow;
+			position: absolute;
+			animation: change 2s infinite;
+
+		}
+		@keyframes change{
+			0%{
+				/*top: 20px;*/
+				transform: translate(0,20px);
+				animation-timing-function: cubic-bezier(1,0,0.96,0.91); 
+			}
+			50%{
+				/*top: 300px;*/
+				transform: translate(0,300px);
+				animation-timing-function: cubic-bezier(0,0.27,0.32,1);
+			}
+			100%{
+				/*top: 20px;*/
+				transform:translate(0,20px);
+				animation-timing-function: cubic-bezier(0,0.27,0.32,1);
+			}
+		}
+	</style>
+</head>
+<body>
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491452385&di=e710a825c454aa53338e13eb2ebd49d6&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.easaa.com%2Ftemplates%2Fnew%2Fimages%2Fdemo%2Fwangyi163.jpg" alt="" class="picture" id="picture">
+
+	<button id="ok">Go</button>
+	<div class="ball">
+		
+	</div>
+	<script type="text/javascript">
+	    var btn=document.getElementById('ok');
+	    var hide=true;
+		function toggle(){
+			var h=document.getElementById('picture');
+			if(hide){
+				h.className= "change";
+				hide=false;
+			}else{
+				h.className= "none";
+				hide=true;
+			}
+
+		}
+		var node=document.getElementById('ok')
+		ok.addEventListener('touchstart',function(e){
+			e.preventDefault();
+			toggle();
+		});
+		document.addEventListener('touchmove',function(e){
+			// e.preventDefault();
+			e.target.className="move";
+		})
+		document.addEventListener('touchend',function(e){
+			// e.preventDefault();
+			// console.log(e)
+			e.target.className="";
+		})
+
+
+		// matrix()就是那些所有方法的底层方法。
+		
+	</script>
+
+</body>
+</html>

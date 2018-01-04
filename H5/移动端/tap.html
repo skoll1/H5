@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+  <style>
+  *{
+    margin:0;
+    padding: 0;
+  }
+  /*1.居中设置*/
+    /*#content { 
+        position:absolute; 
+        top:0;right:0;bottom:0;left:0; 
+        margin:auto; 
+        width:500px; 
+        height:500px; 
+        background-color:yellow; 
+        text-align:center; 
+      }
+    #content img{
+      width: 100px;
+      height: 100px;
+    }
+    .vertical-align-span { 
+      display:inline-block;
+      height:100%; 
+      vertical-align:middle;
+} */
+
+
+/*2：flex可以结合固定大小的盒子,其余实现自适应*/
+  .flex{
+    display: flex;
+    width: 100%;
+    position: absolute;
+    height: 200px;
+    background-color: green;
+    /*flex-direction: column;*/
+    /*流动方向*/
+    justify-content: flex-start;
+    /*流动间隔*/
+    align-items: center;
+  }
+  .l{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+  }
+  .m{
+    /*flex:2;*/
+    width: 200px;
+    height: 100px;
+  }
+  .r{
+    /*flex:1;*/
+    width: 200px;
+    height: 100px;
+    background-color: yellow;
+  }
+  </style>
+</head>
+<body>
+<!-- 1
+<div id="content">
+  <span class="vertical-align-span"></span> <img src="1.jpg" alt="">
+</div> -->
+ 
+<!-- 2：flex可以结合固定大小的盒子实现自适应-->
+<!-- <div class="flex">
+  
+  <div class="l">
+    
+  </div>
+  <div class="m">
+    
+  </div>
+  <div class="r">
+    
+  </div>
+</div> -->
+<button id="click">click</button>
+<button id="tap">tap</button>
+
+<script type="text/javascript">
+if(!HTMLElement.prototype.addTapEvent){
+  HTMLElement.prototype.addTapEvent=function(callback){
+    var tapST=0,
+        tapET=0,
+        tapT=500,
+        tapSCX=0,
+        tapSCY=0,
+        tapECX=0,
+        tapECY=0,
+        tapSH=15,
+        cancleClick=false;
+
+        this.addEventListener('touchstart',function(){
+          tapST=event.timeStamp;
+          var touch=event.changedTouches[0];
+          tapSCX=touch.clientX;
+          tapSCY=touch.clientY;
+          cancleClick=false;         
+        })
+
+        this.addEventListener('touchmove',function(){
+          var touch=event.changedTouches[0];
+          tapECX=touch.clientX;
+          tapSCY=touch.clientY;
+          if((Math.abs(tapECX-tapSCX)>tapSH)||(Math.abs(tapECY-tapSCY)>tapSH)){
+              cancleClick=true;
+        }
+        })
+
+        this.addEventListener('touchend',function(){
+          tapET=event.timeStamp;
+          if(!cancleClick&&(tapET-tapST)<=tapT){
+            callback();
+          }
+        })
+  }
+}
+
+
+  var click=document.querySelector('#click');
+  var tap=document.querySelector('#tap');
+  click.addEventListener('click',function(){console.log('click')})
+  tap.addTapEvent(function(){console.log('tap')})
+  // tap是只在移动端才会使用的。
+
+  // 2 zepto解决click延迟事件原理：自定义tap事件，当点击元素时，touchend先触发，当touchend事件冒泡到document时触发目标元素绑定的tap事件。
+
+  // 穿透出现的原因：遮罩中有一个标签绑定了tap事件，触发时遮罩消失，该标签下方正好有一个绑定了click的按钮，穿透发生在上层遮罩关闭后，此时事件只进行到touchend,而click大概是在300ms之后才执行，所以click触发时，上面遮罩早已消失，就相当于点到了下面的元素。用户点击屏幕，300ms之内，浏览器拦截下这个行为，没有去正真的触发相关的element山绑定的click事件执行函数，而是记录操作线管的数据，等待接下来的操作，由于使用了zepto库，所以事件中监听到touchend触发了，立刻执行相关的操作，影藏了弹层，浏览器认为这次的动作是click，而不是dbclick，所以init一次mouseEvent在相同的屏幕，接着开始事件机制，发现相同的位置有一个element绑定了click处理函数，执行这个函数。。
+
+  // 3tap事件点透解决：在click触发之前阻止他，在touchend中使用e.preventDefault()来阻止后续的click事件。github上有一个叫做fastclick的库
+     // $("#aa").on("touchend", function (event) {
+     //很多处理比如隐藏什么的
+    //     event.preventDefault();
+    // });
+</script>
+</body>
+</html>

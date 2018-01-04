@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#videoControls{
+			width: 100%;
+			height: 100px;
+			border:1px solid red;
+			opacity: 1;
+			transition:all .3s linear;
+			z-index: 9999;
+		}
+		:-webkit-full-screen video {
+			  width: 100%;
+			  height: 100%;
+		}
+		#videoControls{
+			position:fixed;
+			bottom: 0;
+		}
+		video{
+			border:1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>
+			<h2>视频的组成</h2>
+		</li>
+		<li>
+			meta信息，视频，音频，弹幕，缩略图，其他信息
+		</li>
+		<li>
+			每一种视频都是按照他的三种格式来区分大致的种类。
+		</li>
+		<li>
+			容器格式，视频，音频
+		</li>
+	</ul>
+	<video controls width='500' height="300" preload autoplay id="video" controls="none"> 
+	<source src="http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4" type="video/mp4"> 
+	<source src="http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.ogg" type="video/ogg"> <!-- FALLBACK HERE -->
+	 </video>
+
+
+
+	 <div id="videoControls"> 
+	 		<button id="play" title="Play"> &#x25BA; </button> 
+	 		<div id="progress"> 
+	 			<div id="progress_box"> 
+	 					<span id="play_progress">
+	 						当前播放进度 <span id="currentPlay"></span>
+	 					</span> 
+	 			</div> 
+	 		</div> 
+	 		<button id="fullScreen" title="FullScreen Toggle">[ ]</button>
+	</div>
+	<!-- <button id="hidden">hide</button>  -->
+
+	<script type="text/javascript">
+		var video=document.getElementById('video');
+		var videoControls=document.getElementById('videoControls');
+		var play=document.getElementById('play');
+		var processContainer=document.getElementById('progress');
+		var progressHolder=document.getElementById('progress_box');
+		var playProgressBar=document.getElementById("play_progress");
+
+		var fullScreenToggleButton=document.getElementById("fullScreen");
+		var currentPlay=document.getElementById('currentPlay');
+
+		// var hide=document.getElementById('hidden');
+		// video.removeAttribute('controls');
+		// video.controls=false;
+		// 去掉插件
+		// video.defaultMuted=true;
+
+		video.defaultPlaybackRate=0.1;
+
+		video.volume=0.2;
+
+
+
+		// video.addEventListener('mouseover',function(){
+		// 	videoControls.style.opacity=1;
+		// })
+
+		// video.addEventListener('mouseout',function(){
+		// 	videoControls.style.opacity=0;
+		// })
+
+		video.addEventListener('click',function(){
+			playPause();
+		});
+
+		var current=null;
+		video.addEventListener('play',function(){
+			console.log('start')
+			play.title='Pause';
+			play.innerHTML='<span id="pauseButton">&#x2590;&#x2590;</span>';
+			// setInterval(trackPlayProgress(),50)
+			var current=setInterval(function(){
+					currentTimea=Math.floor((video.currentTime/video.duration)*100)+'%';
+					currentPlay.innerHTML=currentTimea;
+					
+			},50);
+
+
+			var buffered=video.buffered;
+			// '缓冲部分:'
+			// console.log(buffered.end(0));
+			// console.log(buffered.length);
+
+
+			var controller=video.controller;
+			// console.log(controller)
+
+
+			var currentSrc=video.currentSrc;
+			// console.log(currentSrc);
+
+
+			// video.defaultMuted=true;
+
+			var rate=video.defaultPlaybackRate;
+			var playbackRate=video.playbackRate;
+			// console.log(rate)
+			video.playbackRate=0.5;
+			// 根本不管用啊。
+			console.log(playbackRate)
+
+
+			var networkState=video.networkState;
+			console.log(networkState)
+			// 0:视频尚未初始化
+			// 1:音频，视频取消选取资源，尚未使用网络。
+			// 2:正在下载数据
+			// 3：没有找到资源来源
+
+			var volume=video.volume;
+			video.volume=0.5;
+			console.log(volume)
+
+
+
+			// setTimeout(trackPlayProgress(),50)
+			// 追踪视频播放进度
+		})
+		video.addEventListener('pause',function(){
+			console.log('pause')
+			play.title='Play';
+			play.innerHTML='&#x25BA';
+
+			clearInterval(current)
+
+
+			clearInterval(current)
+		})
+		video.addEventListener('ended',function(){
+			console.log('end')
+			this.currenttime=0;
+			this.pause();
+			clearInterval(current)
+			// 为什么检测不到停止时候的事件？当一只循环的时候就loop属性的时候就会出现这种情况，后台属性就停不下来了。
+		})
+
+
+
+
+		// 暂停，播放
+		play.addEventListener('click',function(){
+			playPause();
+		});
+
+		// 全屏
+		isVideoFullScreen=false;
+		fullScreenToggleButton.addEventListener('click',function(){
+			// console.log('fullScreen')
+			if(isVideoFullScreen){
+				fullScreenOn();
+			}else{
+				fullScreenOff();
+				console.log('fullScreen')
+			}
+		})
+
+
+		function playPause(){
+			if(video.paused||video.ended){
+				if(video.ended){
+					video.currenttime=0;
+				}
+				video.play();
+			}else{
+				video.pause();
+			}
+		}
+
+		function fullScreenOff(){
+			// 全屏要处理的事情：浏览器怎么全屏，里面的页面怎么全屏，还有全屏以后的层叠顺序怎么设置。
+			launchFullscreen(document.documentElement)
+
+
+			console.log('fullOff');
+			isVideoFullScreen=true;
+			// video.style.cssText="position:fixed;width:"+window.innerWidth+'px;height:'+window.innerHeight+'px;'
+
+			// document.addEventListener('keydown',function(e){
+			// 	e=e||window.event;
+			// 	if((e.keycode||e.which)===27){
+			// 		videoPlayer.fullScreenOff();
+			// 	}
+			// })
+		}
+
+		function fullScreenOn(){
+			exitFullscreen();
+			isVideoFullScreen = false;
+			video.style.position = 'static'; 
+			video.className = ''; 
+			fullScreenToggleButton.className = "control"; 
+			videoControls.className = '';
+		}
+		// 浏览器全屏函数
+		function launchFullscreen(element) {
+			  if(element.requestFullscreen) {
+			    element.requestFullscreen();
+			  } else if(element.mozRequestFullScreen) {
+			    element.mozRequestFullScreen();
+			  } else if(element.webkitRequestFullscreen) {
+			    element.webkitRequestFullscreen();
+			  } else if(element.msRequestFullscreen) {
+			    element.msRequestFullscreen();
+			  }
+			}
+		// 退出全屏
+		function exitFullscreen() {
+		  if(document.exitFullscreen) {
+		    document.exitFullscreen();
+		  } else if(document.mozCancelFullScreen) {
+		    document.mozCancelFullScreen();
+		  } else if(document.webkitExitFullscreen) {
+		    document.webkitExitFullscreen();
+		  }
+		}
+
+		
+
+
+		// 进度条
+		function progressTrack(){
+			current=(video.currentTime/video.duration);
+			console.log(current);
+		}
+		// (function(window,document){
+		// 	const videoPlayer={
+		// 		init:function()
+		// 	}
+		// })(this,codument)
+	</script>
+</body>
+</html>

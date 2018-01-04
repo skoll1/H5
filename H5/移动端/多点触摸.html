@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<title>zepto+touch时间</title>
+	<!-- <link rel="stylesheet" media="all and (orientation:portrait)" href="portrait.css">  
+	<link rel="stylesheet" media="all and (orientation:landscape)" href="landscape.css">  -->
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<style>
+		.touched{
+			height: 100px;
+			width: 100px;
+			border:1px solid red;
+			border-radius: 50px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+		}
+		#touchPad{
+			width: 100%;
+			height: 200px;
+			font-size: 40px;
+			text-align: center;
+			line-height: 200px;
+			background-color: rgba(0,0,0,.5);
+			position: relative;
+			color:#ddd;
+		}
+		#ball{
+			display:none;
+			position: absolute;
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+			background-color: red;
+			top: 0;
+			left: 0;
+		}
+		#desc{
+			height: 30px;
+
+		}
+	</style>
+</head>
+<body>
+	<p id="desc"></p>
+		<div id="touchPad">
+			触摸板
+		</div>
+		<div id="ball">
+			
+		</div>
+	<!-- 尽可能多的禁用原生的手势 -->
+	<script type="text/javascript">
+		var touchpad=document.querySelector('#touchPad'),
+			ball=document.querySelector('#ball'),
+			desc=document.querySelector('#desc');
+
+			var touchHander=function(e){
+				var type=e.type;
+
+				if(type!='touchend'){
+					var pos={
+						x:e.touches[0].clientX,
+						y:e.touches[0].clientY
+					}
+					ball.style.left=pos.x+'px';
+					ball.style.top=pos.y+'px';
+					desc.innerHTML=e.type+":"+pos.x+":"+pos.y;
+				}else{
+					desc.innerHTML=e.type;
+				}
+// 为什么这块会有两套判断的需要
+				switch(type){
+					case 'touchstart':
+					      ball.style.display='block';
+					      break;
+					case  'touchmove':
+					 	  ball.style.display='block';
+						  event.preventDefault();
+						  break;
+					case  'touchend':
+						  ball.style.display="none";
+						  break;
+				}
+			}
+			touchpad.addEventListener('touchstart',touchHander);
+			touchpad.addEventListener('touchmove',touchHander);
+			touchpad.addEventListener('touchend',touchHander);
+
+	</script>
+</body>
+</html>

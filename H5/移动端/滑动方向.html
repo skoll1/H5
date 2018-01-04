@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#touch{
+			width: 500px;
+			height: 500px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin:auto;
+			background-color: rgba(0,0,0,.5)
+		}
+	</style>
+</head>
+<body>
+	<div id="touch">
+		触摸板
+	</div>
+	<script type="text/javascript">
+		var touch=document.querySelector('#touch');
+
+
+			// 让touch兼容mouse事件
+			var getTouch=function(e){
+				var touches=e.touches;
+				if(touches&&touches[0]){
+					return {
+						x:touches[0].clientX,
+						y:touches[0].clientY
+					};
+				}
+					return{
+					x:e.clientX,y:e.clientY
+				
+			};
+		}
+
+			// 获取鼠标的移动距离
+			var getDist=function(p1,p2){
+				if(!p1||!p2)return 2;
+				return Math.sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y))
+			}
+
+			// 移动角度
+			var getAngle=function(p1,p2){
+				var r=Math.atan2(p2.y-p1.y,p2.x-p1.x);
+				var a=r*180/Math.PI;
+				return a;
+			}
+			
+
+			// 移动方向
+			var getSwiperDirection=function(p1,p2){
+				var dx=p2.x-p1.x;
+				var dy=-p2.y+p1.y;
+				var angle=Math.atan2(dy,dx)*180/Math.PI;
+
+				if(angle<45&&angle>-45)return 'right';
+				if(angle>=45&&angle<135)return 'top';
+				if(angle>=135||angle<-135)return 'left';
+				if(angle>=-135&&angle<=-45)return 'bottom';
+			}
+
+			// 开始事件
+			var start=function(e){
+				var touches=e.touches;
+				if(!touches||touches.length==1){
+					point_start=getTouch(e);
+					time_start=Date.now();
+				}
+				
+			}
+
+			var move=function(e){
+				var pos=getTouch(e);
+				point_end=getTouch(e);
+				e.preventDefault();
+			}
+
+			var end=function(e){
+				var time_end=Date.now();
+
+				if(getDist(point_start,point_end)>SWIPE&&time_start-time_end<TIME){
+					var dir=getSwiperDirection(point_end,point_start);
+					touch.innerHTML='swipr'+dir;
+				}
+				// console.log(":"+getDist(point_start,point_end));
+				// console.log(time_start-time_end);
+			}
+
+			var SWIPE=30;
+			var TIME=500;
+			var point_start,point_end,time_start,time_end;
+
+			var startEvt,moveEvt,endEvt;
+
+			if('ontouchstart' in window){
+				startEvt='touchstart';
+				moveEvt='touchmove';
+				endEvt='touchend';
+			}else{
+				startEvt='mousedown';
+				moveEvt='mousemove';
+				endEvt='mouseup';
+			}
+			touch.addEventListener(startEvt,start);
+			touch.addEventListener(moveEvt,move);
+			touch.addEventListener(endEvt,end);
+
+	</script>
+</body>
+</html>

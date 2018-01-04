@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>1</td><td>2</td><td>3</td>
+		</tr>
+
+		<!-- 以上是第一行显示的内容 -->
+		<tr>
+			<td>2</td><td>2</td><td>2</td>
+		</tr>
+		<!-- 第二行显示的内容 -->
+		<h2>table最棒的特性就是他的列可以容纳最宽的元素，他的行可以容纳高度最高的元素，都是自动实现，所以才会用他来实现垂直居中布局</h2>
+	</table>
+
+
+	<h2>完整的表格:表格这里体现语义化好像还蛮合适的</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>name</th><th>age</th><th>city</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>1</th><th>1</th><th>1</th>	
+			</tr>
+			<tr>
+				<th>2</th><th>2</th><th>2</th>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>thank</th>
+				<th>you</th>
+				<th>!</th>
+			</tr>
+		</tfoot>
+	</table>
+	<h2>制作不规则表格</h2>
+	<table>
+	<caption>caption是用来添加表格标题的</caption>
+		<tr>
+			<th>1</th><th>1</th>
+		</tr>
+		<tr>
+			<th colspan="2">2</th><th>2</th><th>2</th>
+		</tr>
+		<tr>
+			<td>3</td><td>3</td><td>3</td>
+		</tr>
+	</table>
+
+
+	<ul>
+		<li>
+			td,th都可以在里面添加theaders来进行辅助屏幕阅读或者其他残障技术简化对表格的处理
+		</li>
+		<li>
+			尽管border属性会让浏览器为表格和每个单元格添加边框，我们还是需要css来分别为各种元素重设样式，针对表单头，每一列，每一行，每一个单元格，都有自己的选择器，如果最后他们都不管用了，还有class和id。
+		</li>
+	</ul>
+</body>
+</html>

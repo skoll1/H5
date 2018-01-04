@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- 告诉浏览器两件事：他处理得是html文档，用来标记文档内容的是html所属的版本 -->
+<html lang="en" manifest="">
+<!-- 新的缓存策略 -->
+<head>
+	<meta charset="UTF-8">
+	<!-- 作用0:声明文档所用的字符编码 -->
+
+	<!-- meta是可以定义文档的各种数据，一个html里面可以包含多个meta元素 -->
+	<meta name="author" content="libateer">
+	<!-- 作用1：定义键值对 -->
+	<meta name="description" content="sdf">
+	<!-- keywords：现在keyword已经不是那么管用了，最好的还是阅读对应搜索引擎给的优化文档 -->
+	<!-- robots -->
+	<!-- generator:网页是用什么生成器来生成的。 -->
+
+	<!-- <meta http-equiv="refresh" content="5"> -->
+	<!-- 让这个页面每五秒重载一次 -->
+	<!-- 作用2：模拟http标头的字段 -->
+	<!-- default-style:指定页面优先的样式表 -->
+	<!-- content-type:另一种申明样式表的方法 -->
+
+
+	<title>Document</title>
+	<!-- 必须有一个title，其他元素可有可无。 -->
+
+
+
+
+	<!-- 关于link -->
+	<link rel="stylesheet" href="">
+	<!-- media: -->
+	<!-- size:指定图标的大小 -->
+	<!-- type:指定所关联的MIME类型。text/css,image/x-icon -->
+
+	<!-- 最重要的属性是rel,为rel设置的值决定了浏览器对待link元素的方式。 -->
+	<link rel="icon" href="" type="image/x-icon">
+	<!-- 如果网站标志文件位于服务器的根目录，那么即使没有link元素。大多数浏览器在载入这个页面的时候都会自动请求这个文件。 -->
+
+	<link rel="prefetch" href="2.html">
+	<!-- 预先获取资源 -->
+	<script type="text/javascript" defer></script>
+	<!-- 实现的效果和把脚本放到最下边一样 -->
+
+	<script type="text/javascript" async></script>
+	<!-- 脚本不在按照顺序执行 -->
+
+	<noscript>
+		<!-- 这里面可以定义当不支持script的时候的一些行为，比如重定向到另一个页面之类的 -->
+		
+	</noscript>
+</head>
+<body>
+<!-- 文档内容都包含在body里面。 -->
+	<h2>
+		怎么理解语义化
+	</h2>
+	<p>直观认识标签，对于搜索引擎的抓取有好处，正确的标签做正确的事，html语义化就是让页面的内容结构化，便于对浏览器，搜索引擎的解析，利于seo，使阅读的源代码的人更加容易的对网站分块，便于阅读维护理解</p>
+	<p>
+		将元素的语义和元素对其内容呈现结构的影响分离开来，html只负责文档的内容和含义，内容的呈现只由应用于css样式控制。但是由于一部分的局限性，导致现在出现了两种标准，一种是只有语义方面，一种旧的元素因为用法是在太过广泛，所以新标准也得屈服。
+	</p>
+	<h2>怎么使用语义化：先问问自己如何发挥这个元素的语义化，如果不能马上回答出来就不要用了</h2>
+</body>
+</html>

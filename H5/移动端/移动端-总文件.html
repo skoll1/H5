@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<title>Document</title>
+	<!-- <link rel="stylesheet" media="all and (orientation:portrait)" href="portrait.css">  
+	<link rel="stylesheet" media="all and (orientation:landscape)" href="landscape.css">  -->
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<!-- meta标签 -->
+	<style media="all and (orientation:portrait)" type="text/css">
+		#landscape { display: none; }
+		body{
+			background-color:red;
+		}
+	</style>
+	<style media="all and (orientation:landscape)" type="text/css">
+		#portrait { display: none; }
+		body{background-color:yellow;}
+	</style>
+	<style>
+		body{
+			overflow: hidden;
+		}
+		.container{
+			width: 1000px;
+			height: 10030px;
+			background-color: #eee;
+			overflow: auto;
+			-webkit-overflow-scrolling:touch;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>overflow</h1>
+		<ul>
+			<li>在某些情况下，overflow是唯一的选择</li>
+			<li>页面缩放，转向的问题：</li>
+			<li>touchend不会有任何的触摸对象，但他由一个changedTuouches组成的列表</li>
+			<li>双指缩放图像的中心点怎么来选择</li>
+			<li>setTimeout(function(){window.scrollTo(0,1);},1000) 为什么要隐藏地址栏？</li>
+			<li>减去浏览器外壳高度值是什么意思？</li>
+			<li>手势之间的互相干扰</li>
+			<li>iphone上的submit按钮bug:如果你不设置-webkit-appearence:none;的话，他还是会用自己的默认样式的。</li>
+			<li>在某些情况下，overflow是唯一的选择</li>
+			<li>页面缩放，转向的问题：</li>
+			<li>移动端的自动播放问题：</li>
+			<li>手机端字体iphone最小可以显示到10px,安卓大部分手机不支持高清显示屏幕，像素不够只能显示最小10px的字</li>
+			<li>屏幕的分辨率和屏幕大小</li>
+			<li>-webkit-overflow-scrolling:touch;</li>
+			<li>需要注意的是，运算符前后都需要保留一个空格，例如：width: calc(100% - 10px)任何长度都可以用这个来计算</li>
+			<li>影响视觉的：屏幕分辨率，设备像素比</li>
+			<li>设备像素(ppi)：每英寸所拥有的像素数目，数值越高，越能显示更高的图片。像素和分辨率是成正比的，像素越大，分辨率也越高</li>
+			<li>屏幕分辨率：</li>
+			<li>css像素：</li>
+			<li>设备像素比：有一张表，查那个就可以了。显示2倍图，三倍图</li>
+			<li>不要用理论解释移动浏览器的bug</li>
+			<li>最小点击区域44px：移动端是有最小点击识别区的，元素大小低于这个值时被点击是不会触发click事件的。</li>
+			<li>可以调用硬件功能：可以通过设置a标签href类型来实现拨打电话、发送短信和邮件等功能。可以通过<input type="file">的accept 属性，调用本地图片或拍照。还可以使用html5的运动传感器数据事件实现微信摇一摇功能</li>
+			<li>
+				viewport是专门为手机做的一个标签：有些屏幕很小的智能手机，分辨率确很大，传统桌面网站放到上面，界面显得很小，阅读体验很不好，需要一种将原始视图在手机上放大的机制。使用viewport就可以解决这个问题。
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

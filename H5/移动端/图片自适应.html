@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>serset</h1>
+	<img 
+    srcset="quilt_3/large.jpg  1240w, 
+            quilt_3/medium.jpg  620w,
+            quilt_3/small.jpg   310w"
+    sizes="(min-width: 41.25em) 38.75em,
+           calc(100vw - 2.5em)"
+    src="quilt_3/medium.jpg"
+    alt="A crazy quilt whose irregular fabric scraps are fit into a lattice of diamonds." />
+    <!-- 仅仅是需要缩放图片 -->
+    <h2>
+    	懒汉用serset，疯子用picture。
+    </h2>
+    <picture>
+    <!-- 16:9 crop -->
+    <source
+        media="(min-width: 36em)"
+        srcset="quilt_2/detail/large.jpg  1920w,
+                quilt_2/detail/medium.jpg  960w,
+                quilt_2/detail/small.jpg   480w" />
+    <!-- square crop -->
+    <source
+        srcset="quilt_2/square/large.jpg  822w,
+                quilt_2/square/medium.jpg 640w,
+                quilt_2/square/small.jpg  320w" />
+    <img
+        src="quilt_2/detail/medium.jpg"
+        alt="Detail of the above quilt, highlighting the embroidery and exotic stitchwork." />
+</picture>
+<ul>
+	<li>
+		一个picture包含任意个数的source元素和一个img.浏览器遍历picture的source,知道找到一个属性满足当前环境的mdeia。他将匹配source的srcset传给img，就是那个我们任然可以在页面上看到的元素。
+	</li>
+	<li>
+		picture是一个不可见的包装，一个给img提供srcset的神奇的span。可以对img渐进增强。
+	</li>
+</ul>
+</body>
+</html>

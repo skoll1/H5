@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 13px;">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<style>
+		body{
+			 background:rgb(22,1,40);
+			 overflow: hidden;
+		}
+		h1,h2{
+			margin-top: 20px;
+			text-align: center;
+			color:rgb(244,194,100);
+			font-size: 1rem;
+		}
+		*{padding:0;margin:0;}
+		.container{
+			width: 272px;
+			height: 350px;
+			margin-top:-175px;
+			top:50%;
+			left: 50%;
+			margin-left: -136px;
+			border-radius: 10px;
+			overflow: hidden;
+			/*background-color: red;*/
+			position: absolute;
+			/*top:30px;*/
+		}
+		ul{
+			list-style: none;
+			width: 1555px;
+			height: 350px;
+			/*background-color: yellow;*/
+			position:relative;
+			left:-35px;
+			transition: left 0.2s cubic-bezier(0, 0.49, 0, 1.18);
+		}
+		ul li{
+			width: 272px;
+			height: 350px;
+			border-radius: 15px;
+			background-color: white;
+			float: left;
+			margin-left:36px;
+			text-anchor: center;
+			font-size: 50px;
+		}
+		.show{
+			box-shadow: 0px 0px 13px 2px white;
+		}
+		.hide{
+			opacity: .3;
+			filter:blur(3px);
+		}
+		footer{
+			display: -webkit-flex;
+			text-align: center;
+			position: absolute;
+			bottom: 0px;
+			width: 100%;
+			height: 80px;
+			justify-content: space-around;
+			/*padding-top: 10px;*/
+			/*为什么他的padding是往外面来的*/
+		}
+		footer .div{
+			margin-top: 10px;
+			width: 60px;
+			background-color: red;
+			height:60px;
+			border-radius: 5px;
+			line-height: 55px;
+			font-size: 2rem;
+			/*justify-content: space-around;*/
+		}
+		footer .active{
+			box-shadow:inset 0px 0px 20px 3px rgb(244,194,100);
+		}
+	</style>
+</head>
+<body>
+<h1>集齐五福，拼手气分2亿</h1>
+<h2>7,740,451人已集齐，1月27日22:18开奖</h2>
+	<div class="container">
+		<ul>
+			<li class="show">杨</li>
+			<li class="hide">宇</li>
+			<li class="hide">没</li>
+			<li class="hide">有</li>
+			<li class="hide">速度</li>
+		</ul>
+	</div>
+	<footer>
+		<div class="div active">福</div>
+		<div class="div">福</div>
+		<div class="div">福</div>
+		<div class="div">福</div>
+		<div class="div">福</div>
+	</footer>
+	<script type="text/javascript">
+		window.onload=function(){
+			function $(el){
+				return document.querySelector(el)
+			};
+			function all(el){
+				return document.querySelectorAll(el);
+			};
+			var footer = all('.div');
+			var len=footer.length;
+
+			var oUl=$('ul');
+			var li=all('li')
+
+			var l=oUl.offsetLeft;
+
+			var startx, starty;
+
+			var nowIndex=0;
+
+			var lenLi=li.length;
+			var leftP=['-36','-344','-652','-961','-1268'];
+			for(var i=0;i<len;i++){
+				footer[i].setAttribute('index',i);
+				footer[i].addEventListener('touchstart',function(){
+					var index=this.getAttribute('index');
+					// 控制上面的动
+					// 为什么算不出来日
+					// var leftP=['-36','-344','-652','-961','-1268'];
+					oUl.style.left=leftP[index]+'px';
+					// oUl.style[transform]='translate3d('+leftP[index]+'px'+'0,0)';
+
+
+
+					for(var j=0;j<len;j++){
+						footer[j].setAttribute('class','');
+						footer[j].setAttribute('class','div');
+
+						// 上面样式的添加
+						li[j].setAttribute('class','hide');
+					}
+					footer[index].setAttribute('class','active div');
+					li[index].setAttribute('class','show');
+				})
+			}
+			
+			for(var i=0;i<lenLi;i++){
+				li[i].setAttribute('index',i);
+			}
+			
+			function addTouchEvents(){
+			var bd=document.querySelector('html');
+			bd.addEventListener('touchstart',handleTouchEvents)
+			bd.addEventListener('touchmove',handleTouchEvents)
+			bd.addEventListener('touchend',handleTouchEvents)
+			}
+			addTouchEvents();
+			
+			
+			function getAngle(angx, angy) {
+        		return Math.atan2(angy, angx) * 180 / Math.PI;
+    		};
+    		function getDirection(startx, starty, endx, endy) {
+		        var angx = endx - startx;
+		        var angy = endy - starty;
+		        var result = 0;
+		        if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
+		            return result;
+		        }
+		        var angle = getAngle(angx, angy);
+		        if (angle >= -135 && angle <= -45) {
+		            result = 1;
+		        } else if (angle > 45 && angle < 135) {
+		            result = 2;
+		        } else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
+		            result = 3;
+		        } else if (angle >= -45 && angle <= 45) {
+		            result = 4;
+		        }
+		        return result;
+    			}
+    		function handleTouchEvents(e){
+						// var direction=0;
+						var dis=0;
+						// var nowIndex=0;
+						if(e.type=='touchstart'){
+							// 开始滑动
+							startx = e.touches[0].pageX;
+			        		starty = e.touches[0].pageY;
+							direction=0;
+						    }else if(e.type=='touchmove'){
+							
+							}else if(e.type=='touchend'){
+									var endx, endy;
+					        		endx = e.changedTouches[0].pageX;
+					        		endy = e.changedTouches[0].pageY;
+					        		dis=(endx-startx)+l;
+					        // console.log(dis)
+					        var direction = getDirection(startx, starty, endx, endy);
+								switch(direction){
+										case 3:
+										var nowIndex=$('.active').getAttribute('index');
+					                		nowIndex++;
+					                	console.log(nowIndex)
+
+					                	if(nowIndex<5){
+					                		oUl.style.left=leftP[nowIndex]+'px';
+					                	for(var j=0;j<len;j++){
+											footer[j].setAttribute('class','');
+											footer[j].setAttribute('class','div');
+
+											// 上面样式的添加
+											li[j].setAttribute('class','hide');
+										}
+										footer[nowIndex].setAttribute('class','active div');
+										li[nowIndex].setAttribute('class','show');
+										console.log(nowIndex)
+					                	}else{
+					                		nowIndex=4;
+					               	 	}
+					               	 	break;
+					               	 	case 4:
+					               	 	var nowIndex=$('.active').getAttribute('index');
+					                		nowIndex--;
+					                	console.log(nowIndex)
+
+					                	if(nowIndex>-1){
+					                		oUl.style.left=leftP[nowIndex]+'px';
+					                	for(var j=0;j<len;j++){
+											footer[j].setAttribute('class','');
+											footer[j].setAttribute('class','div');
+
+											// 上面样式的添加
+											li[j].setAttribute('class','hide');
+										}
+										footer[nowIndex].setAttribute('class','active div');
+										li[nowIndex].setAttribute('class','show');
+										console.log(nowIndex)
+					                	}else{
+					                		nowIndex=0;
+					               	 	}
+					               	 	break;
+
+								}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							}
+					}
+			setTimeout(function(){window.scrollTo(0,1);},1000)
+
+			}
+	</script>
+</body>
+</html>
