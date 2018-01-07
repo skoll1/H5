@@ -10,6 +10,8 @@
 	<meta name="author" content="libateer">
 	<!-- 作用1：定义键值对 -->
 	<meta name="description" content="sdf">
+	<meta name="author" content="libateer">
+
 	<!-- keywords：现在keyword已经不是那么管用了，最好的还是阅读对应搜索引擎给的优化文档 -->
 	<!-- robots -->
 	<!-- generator:网页是用什么生成器来生成的。 -->
@@ -48,7 +50,9 @@
 	<noscript>
 		<!-- 这里面可以定义当不支持script的时候的一些行为，比如重定向到另一个页面之类的 -->
 		
-	</noscript>
+    </noscript>
+    <base href="/www.baidu.com">
+    <!-- 定义所有链接的默认url和默认目标，放在最前面那么所有的都是可以使用的-->
 </head>
 <body>
 <!-- 文档内容都包含在body里面。 -->
@@ -60,5 +64,84 @@
 		将元素的语义和元素对其内容呈现结构的影响分离开来，html只负责文档的内容和含义，内容的呈现只由应用于css样式控制。但是由于一部分的局限性，导致现在出现了两种标准，一种是只有语义方面，一种旧的元素因为用法是在太过广泛，所以新标准也得屈服。
 	</p>
 	<h2>怎么使用语义化：先问问自己如何发挥这个元素的语义化，如果不能马上回答出来就不要用了</h2>
+	<header>表示任何适合出现在首部的东西，可以内嵌导航，他不仅可以做整个页面的首部，而且可以做每个节的首部</header>
+	<nav>
+		<a href="/html">html</a>
+		<a href="/css">css</a>
+		<a href="/javascript">javascript</a>
+		<!-- nav是真的适合做导航 -->
+	</nav>
+		<h1>从之前的书来看，他是从小到大的来而介绍这个语义化的</h1>
+		<!-- h1标题的css样式：display：block.font-size:2em. -->
+		<hgroup>
+			<h1>对h1标题进行分组</h1>
+			<h2>对h2标题进行分组</h2>
+		</hgroup>
+		<section>表示节内容结构，他可以替代div了,起码在第一层大的结构里面，要不就轮着来
+					<footer>
+						这个节的尾部
+					</footer>
+		</section>
+	
+	
+	
+	
+	
+	
+		<article>
+			表示这是一张网页中可以独立成篇的部分
+		</article>
+		<hgroup>
+			<h1>welcome to my WWF</h1>
+			<h2>For a living planet</h2>
+			<h3>对标题元素进行分组</h3>
+		</hgroup>
+	
+	
+		<aside>生成附录类型的信息</aside>
+	
+	
+	
+		<details>
+			<summary>
+				ok
+			</summary>
+			sdfsdfasdfsdfsad
+			sdfasd
+			asdf
+			asd
+			fsa
+			df
+			asd
+	
+			<!-- 真废，还不如用js实现呢。。 -->
+		</details>
+	<footer>
+		整个页面的尾部
+	</footer>
+	<aside>
+			文章的侧边栏，aside定义article标签外的内容。
+		</aside>
+		<address>
+			定义文档作者、所有者的联系信息|address标签通常被用在foter元素的其他信息中。如果这个标签位于article里面，则表示该文章作者所有者的联系信息。
+		</address>
+
+		<ul>
+			<li>
+				和结构有关的标签不支持的有
+			</li>
+			<li>
+				<frameset> h5不支持框架了
+			</li>
+			<li>
+				<frame>
+			</li>
+			<li>
+				一个页面可以有多个fotter标签
+			</li>
+			<li>
+				常见meta标签总结
+			</li>
+		</ul>
 </body>
 </html>

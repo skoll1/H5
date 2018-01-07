@@ -5,25 +5,6 @@
 	<title>Document</title>
 </head>
 <body>
-	
-	<a href="1.html">
-		<img src="1.png" alt="" ismap>
-		<!-- 当点击这个a标签的时候，会把它在图片上的坐标也发送过去。 -->
-	</a>
-
-
-
-	<!-- 创建客户端响应分区 -->
-	<img src="1.png" alt="" usemap="#mymap">
-	<map name="mymap">
-		<area shape="rect" coords="3,5,10,20" href="1.html" alt="">
-		<area shape="rect" coords="3,5,10,20" href="2.html" alt="">
-		<area shape="rect" coords="3,5,10,20" href="3.html" alt="">
-		<!-- 根据不同的坐标点击区域，转到不同的页面 -->
-	</map>
-
-
-
 	<a href="1.html" target="myFrame"></a>
 	<iframe  frameborder="0" name="myFrame" sandbox="allow-forms" seamless=""></iframe>
 	<!-- sandbox是用来禁用iframe里面的相关功能的 -->
@@ -33,13 +14,17 @@
 
 	
 
-	<h3>插件插入内容</h3>
-	<object data="" type="">
+	<h3>插件插入内容,向这个里面页面加入多媒体</h3>
+	<object data="/www.baidu.com" type="mime">
 		<b>你的浏览器不支持这项功能</b>
+		<!-- 至少有data和type -->
 		<!-- 最大的优势是可以支持错误显示 -->
 	</object>
 	<embed src="" type="">
-
+		<object data="horse.wav">
+				<param name="autoplay" value="true">
+				<!-- 定义Object标签提供嵌入内容的运行时参数的name和value对 -->
+		</object>
 
 
 

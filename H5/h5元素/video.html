@@ -39,10 +39,20 @@
 		<li>
 			容器格式，视频，音频
 		</li>
+		<li>
+			<embed src="" type="">
+				<!-- 定义嵌入的内容，插件 -->
+		</li>
+		<li>
+			<track>
+		</li>
 	</ul>
 	<video controls width='500' height="300" preload autoplay id="video" controls="none"> 
 	<source src="http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4" type="video/mp4"> 
 	<source src="http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.ogg" type="video/ogg"> <!-- FALLBACK HERE -->
+		<!-- 带有两个源文件的音频播放器。浏览器需要选择他所支持的源文件，如果都支持则任选一个 -->
+		<track></track>
+		<!-- 指定定时文本轨道 -->
 	 </video>
 
 

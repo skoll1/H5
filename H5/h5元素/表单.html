@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>button元素内部，您可以防止内容，比如图像或者文本。这是和imput 元素创建的按钮之间的不同。必须始终为button元素添加type属性</h1>
+    <p>如果在表单中使用button元素，不同的浏览器会提交不同的按钮值，所以在表单中最好使用input创建的按钮</p>
+<h1>有个很标准的h5表单是在node那边</h1>
+<ul>
+    <li>
+        label:label标签为input元素定义标注，label元素是不会像用户呈现任何特殊效果，不过他为鼠标用户改进了可用性。如果你在label元素内点击文本，就会触发此控件，也就是说，当用户选择该标签的时候，浏览器会自动将焦点转到和该标签相关的表单控件上
+    </li>
+</ul>
+
+<form action="demp.html" method="get">
+    <keygen name="security">
+        <!-- 标签规定用于表单的密匙对生成器字段，当提交表单时，私匙存储在本地，公匙发送到服务器 -->
+    <input type="submit"> 
+</form>
+
+<form>
+        <fieldset>
+          <legend>Personalia:</legend>
+          Name: <input type="text" size="30"><br>
+          Email: <input type="text" size="30"><br>
+          Date of birth: <input type="text" size="10">
+        </fieldset>
+</form>
+       <!-- 组合表单中的相关元素 ,如果你有很多的选项组合，那么你可以使用这个标签很简单的将选项组合在一起-->
+       <select name="" id="">
+           <option value="1"></option>
+
+            <optgroup label="基本信息">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </optgroup>
+            <optgroup label="升级信息">
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </optgroup>
+       </select>
+       <ul>
+           <li>
+               disabled:规定此选项应在首次加载的时候被禁用
+           </li>
+           <li>
+               label:
+           </li>
+           <li>
+               selected:selected:首次显示在列表中表现为选中状态
+           </li>
+           <li>
+               value:定义送往服务器的选项值。
+           </li>
+           <li>
+                <input list="browsers"> 
+                
+                <datalist id="browsers"> 
+                  <option value="Internet Explorer"> 
+                  <option value="Firefox"> 
+                  <option value="Chrome"> 
+                  <option value="Opera"> 
+                  <option value="Safari"> 
+                </datalist>
+                <!-- input下拉列表 -->
+           </li>
+       </ul>
+</body>
+</html>
