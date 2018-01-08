@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>优势和劣势</h1>
+    <ul>
+        <li>
+            拓展了cookie的4k限制
+        </li>
+        <li>
+            会将第一次请求的数据直接存储到本地，这个相当于5M大小的针对于前端页面的数据库。
+        </li>
+        <li>
+            只能支持string的存储,不能json需要转换
+        </li>
+        <li>
+            不能被爬虫抓取
+        </li>
+        <li>
+            本质上是对字符串的读取，如果存储内容多的话会消耗内存空间，导致页面变卡
+        </li>
+    </ul>
+    <h1>注意事项</h1>
+    <ul>
+        <li>
+            三种写入方法
+        </li>
+        <li>
+            读取也是三种方法
+        </li>
+        <li>
+            也是遵循同源策略，不同网站不能共用
+        </li>
+        <li>
+            删除消息
+        </li>
+        <li>
+            适用范围：localstorage可以存储一些不需要和服务器交互的数据，比如导航栏的状态，一些普通的数据进行缓存。甚至我们可以存储html片段，js或者css文件段。可以控制来存储一些不常改动的js/css文件。减少用户请求宽带的同时优化整个页面的加载速度。
+        </li>
+        <li>
+            h5游戏通常会产生一些本地数据，localstorage非常适合。如果遇到一些内容特别多的表单，为了优化体验，我们可以把表单拆分为多个子页面，然后按照步骤引导用户填写。
+        </li>
+    </ul>
+    <script>
+        if(window.localStorage){
+            console.log('浏览器支持')
+            var storage=window.localStorage;
+            storage.setItem('name','libateer');
+            storage.age=20;
+            storage['work']='web';
+            console.log(storage['name']);
+            console.log(storage.getItem('age'))
+            
+            // storage.clear();
+            // 全部删除
+
+            storage.removeItem('name')
+
+
+        }else{
+            console.log('不支持')
+        }
+    </script>
+</body>
+</html>
