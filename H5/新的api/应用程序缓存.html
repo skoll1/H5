@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" manifest="manifest.appache">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>应用程序缓存</h1>
+    <ul>
+        <li>
+            下个星期要实验在express里面
+        </li>
+        <li>
+            第一步：服务器上建立一个文件
+            <ul>
+                <li>
+                    .appache 缓存清单文件
+                </li>
+                <li>
+                    确定了哪些文件需要缓存，哪些不需要，如果资源无法访问使用什么页面等
+                </li>
+                <li>
+                    值得注意的是，载有这个manifest文件的html文档将一定会被缓存，这个会在后边再次提到。
+                </li>
+                <li>
+                    manifest文件的MIME类型必须是text/cache-manifest.
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h1>缓存和加载机制</h1>
+    <ul>
+        <li>
+            浏览器加载完html文档之后，会查看其是否有引入manifest文件。如果有就会加载这个文件，然后根据文件的内容缓存内容。
+        </li>
+        <li>
+            之后访问的时候，浏览器会先查看文件是否被修改，浏览器直接从缓存中加载文档和资源，不会访问网络，无论是否联网，都是不会访问的。
+        </li>
+        <li>
+            在缓存多个资源文件的时候，浏览器下载资源文件都会先放在一个临时的缓存中，如果有任何一个资源文件下载失败，浏览器将停止对其他资源的下载，并清除临时缓存。如果所有资源文件都被成功下载，浏览器将会把这些资源以及引用文件的html文档永久离线缓存。
+        </li>
+        <li>
+            每个缓存的页面都需要加入manifest属性
+        </li>
+        <li>
+            不要将manifest文件本身加入缓存，如果加入，浏览器将不会检测到服务器上的manifest的更新，页面版本将万年不变。
+        </li>
+        <li>
+            坑
+            <ul>
+                <li>
+                    在manifest文件中定义的资源全部被加载成功之后，这些资源联通引用文件的html文档一并将被移动到永久离线缓存中，所以说如果只是想缓存js,css，图片等文件，而不是希望缓存html文档以保持最新内容的情况来说，坑
+                </li>
+                <li>
+                    站点能缓存的数据的上限是5MB.
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h1>适用场景</h1>
+    <ul>
+        <li>
+            离线应用和静态网站
+        </li>
+    </ul>
+</body>
+</html>
