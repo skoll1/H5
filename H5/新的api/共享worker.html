@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>
+            
+        </li>
+    </ul>
+    <script>
+       
+            //创建一个Worker对象，并向它传递将在新线程中执行的脚本url，同时返回一个worker实例。
+            var worker = new SharedWorker('shr.js');
+            worker.port.start()
+            worker.port.onmessage=function(e){
+                console.log(e);
+            }
+            
+            worker.port.postMessage('1234');
+            // 绑定方法来接受worker发过来的数据
+
+            // worker.port.start();
+       
+    </script>
+</body>
+</html>

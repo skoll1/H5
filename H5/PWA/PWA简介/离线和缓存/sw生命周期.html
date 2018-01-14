@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <ul>
+       <li>
+           在页面的js主线程中使用serviceWorkerContainer.register()来注册，在注册的过程中，浏览器会在后台中启动尝试service workerde 安装步骤。
+       </li>
+       <li>
+           如果注册成功，sr会在serviceWorkerGlobalScope环境中运行，这是一个特殊的worker context，与主脚本的运行线程相独立，同事也没有访问DOM的能力。
+       </li>
+       <li>
+           后台的开始安装步骤，通常在安装的时候需要缓存一些静态资源。如果所有的资源成功缓存则安装成功，如果有任何的静态资源缓存失败则安装失败，在这里失败的不要紧，会自动安装直到成功，如果不成功则无法进行下一步，激活servece worker.
+       </li>
+       <li>
+           开始激活service  worker,但是必须要在安装成功之后，当安装成功之后，会收到一个激活事件。激活事件的处理函数中，主要操作是清理旧版本的service worker脚本中使用的资源。
+       </li>
+       <li>
+           激活成功的service worker可以控制页面，但是只对成功注册了service worker后打开的页面。也就是说，页面打开时有没有service wrker，决定了接下来页面的声明周期内受不受service worker的控制。所以，只有当页面刷新后，之前不受service worker控制的页面才有可能被控制起来。
+       </li>
+   </ul>
+   <h1>
+       service worker 的生命周期
+   </h1>
+   <ul>
+       <li>
+           install:发生在sr注册之后，表示开始安装，触发install事件回调指定一些静态资源进行离线缓存。
+           <ul>
+               <li>
+                   event.waitUntil()
+               </li>
+               <li>
+                   self.skipWaiting()
+               </li>
+           </ul>
+       </li>
+       <li>
+           installed:sr已经完成了安装，并且等待其他的sr线程被关闭。
+       </li>
+       <li>
+           activating:在这个状态下没有被其他的sr控制的客户端，允许当前的worker完成安装，并且清除了其他的worker以及关联缓存的旧缓存资源，等待新的sr线程被激活。
+           <ul>
+               <li>
+                   event.waitUntil()
+               </li>
+               <li>
+                   self.clients.claim()
+               </li>
+           </ul>
+       </li>
+       <li>
+        activated:这个状态会处理active回调，并且处理功能性的事件，fetch,sync,push
+        <ul>
+            <li>
+                fetch:当浏览器在当前的scope下发起请求时，会触发fetch事件，
+            </li>
+            <li>
+                push:当订阅了推送服务之后，可以使用推送的方式唤醒sr以响应来自系统消息传递服务的消息，即使用户已经关闭了页面。
+            </li>
+            <li>
+                sync:后台同步，仅在理论中
+            </li>
+        </ul>
+       </li>
+       <li>
+           redundant:废弃状态，表示一个生命周期的结束。
+           <ul>
+               <li>
+                   安装失败
+               </li>
+               <li>
+                   激活失败
+               </li>
+               <li>
+                   新版本的sr替换了他并成为激活状态
+               </li>
+           </ul>
+       </li>
+   </ul>
+</body>
+</html>

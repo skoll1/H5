@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        audio{
+            width:100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <audio :src="mp3" :autoplay="isAuto"></audio>
+    </div>
+    <script>
+        var app=new Vue({
+            el:"#app",
+            data:{
+                mp3:'http://m10.music.126.net/20180114001942/d1c137f854a096fffc4c05c5393b0424/ymusic/6012/8b72/947a/1335f19498ec890bd18cb9738e8d1d72.mp3',
+                isAuto:false,
+            },
+            mounted:function(){
+
+            }
+        })
+    </script>
+</body>
+</html>

@@ -6,7 +6,116 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-    
+<body onload="init()">
+    <div id="result">
+
+    </div>
+    <div class="zhuyi">
+        <ul>
+            <li>
+                chrome不能再本地适用web worker
+            </li>
+            <li>
+                使用步骤
+            </li>
+            <li>
+                worker.terminate()可以终止一个worker的执行
+            </li>
+            <li>
+                基础知识的补充
+                <ul>
+                    <li>
+                        共享worker:可以被多个脚本使用
+                        <ul>
+                            <li>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li> 
+                        专用worker，标准worker仅在单一脚本中被使用，一个专用worker仅仅能被首次生成他的脚本使用
+                    </li>
+                    <li>
+                        workers和主线程之间的数据传递双方均是通过postMessage()方法发送各自的消息，使用onmessage事件处理函数来响应消息,消息是被包含在Message事件的data属性中，值得注意的是在整个过程中，数据并不是被共享而是被复制。传递worker的对象需要进行序列化，接下来在另一端还需要反序列化，页面与worker不会共享同一个实例
+                    </li>
+                    <li>
+                        subworker:如果需要的话worker能够生成更多的worker.这就是所谓的subworker，他们必须托管在同源的父页面内
+                    </li>
+                    <li>
+                        线程能够访问一个全局函数importScripts()来引入脚本，该函数接受0个或者多个URL参数来引入资源。浏览器加载并运行每一个列出的脚本。每个脚本中的全局对象都能够被worker使用。如果脚本无法被加载，将抛出异常，接下来的代码也无法执行
+                    </li>
+                </ul>
+            </li>
+            <li>
+                使用场景
+                <ul>
+                    <li>
+                        在前端执行一些复杂的大量运算而不会影响页面的展示，并且不会弹出恶心的脚本正忙提示。
+                    </li>
+                    <li>
+                        一般来说js和页面的ui共同使用一个线程，当点击一个按钮开始运行js后，在这段代码运行完毕之后，页面是无法响应用户操作的，此时对于用户来说页面相当于冻结。此时这段代码可以交给web worker在后台执行，那么页面在js运行的时候任然可以响应用户操作。后台会启动一个worker线程来执行这段代码
+                    </li>
+                    <li>
+                        webworker进行页面之间的信息传递.好像不可能，各个线程之间是独立的。
+                    </li>
+                    <li>
+                        可以使用xmlHttpRequest执行IO.一旦创建，一个worker可以将消息发送到创建他的js代码，然后将消息通过发步到指定的事件处理程序。
+                    </li>
+                </ul>
+            </li>
+            <li>
+                局限
+                <ul>
+                    <li>
+                        不能跨域加载js
+                    </li>
+                    <li>
+                        worker内代码不能访问dom
+                    </li>
+                    <li>
+                        无法访问window,document之类的浏览器全局变量，以及他们的默认方法和属性。
+                    </li>
+                    <li>
+                        使用importScripts加载外部的js
+                    </li>
+                    <li>
+                        关于线程安全：worker接口会生成真正的操作系统级别的线程，如果代码有问题，会产生并发的危险。
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+         function init(){
+            //创建一个Worker对象，并向它传递将在新线程中执行的脚本url，同时返回一个worker实例。
+            //进行使用前的检测
+
+            if(window.Worker){
+                // 
+                console.log('ok You can use web worker')
+            }
+            var worker = new Worker('sr.js');
+            
+            worker.postMessage('hello world');
+            // 绑定方法来接受worker发过来的数据
+
+            worker.onmessage = function(event){
+                // onmessage允许我们在任何的时刻，一旦受到消息就可以执行一些代码，代码中消息本身作为事件的data属性进行使用，这个相当于一个小型的web worker
+                console.log(event.data)
+                document.getElementById('result').innerHTML+=event.data+"<br/>" ;
+            };
+
+            worker.onerror=function(error){
+                // 主要有以下三个字段
+                // message:可读性良好的错误消息
+
+                // filename
+                // 发生错误的脚本文件名
+
+                // lineno
+                // 发生错误时所在脚本文件的行号
+            }
+        };
+    </script>
 </body>
 </html>

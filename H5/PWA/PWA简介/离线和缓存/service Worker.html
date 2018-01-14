@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>关键词</h1>
+    <ul>
+        <li>
+            渐进式
+            <ul>
+                <li>
+                    降低站点改造的代价，逐步支持各项技术，不会一簇而就。
+                </li>
+                <li>
+                    新技术标准的支持度还不完全，新技术的标准还未完全确定。
+                </li>
+                <li>
+                    pwa改造的成本
+                    <ul>
+                        <li>
+                            安全
+                        </li>
+                        <li>
+                            性能
+                        </li>
+                        <li>
+                            体验
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h1>一般网站的改造步骤</h1>
+    <ul>
+        <li>
+            安全:将全站https化，因为这是PWA的基础，没有https,就没有service worker
+        </li>
+        <li>
+            使用service worker来提升基础性能，离线提供静态文件，把用户首屏体验提升上来。
+        </li>
+        <li>
+            app Manifest：
+        </li>
+        <li>
+            考虑其他
+        </li>
+    </ul>
+    <h1>如何让网页的体验做到极致</h1>
+    <ul>
+        <li>
+            尽量降低一个页面的网络请求成本从而缩短页面加载资源的时间并降低用户可感知的延时。当然减少用户可感知的延时也不仅仅是在网络请求成本层面，还有浏览器渲染效率，代码质量等。
+        </li>
+    </ul>
+    <h1>service worker具有以下功能和特点</h1>
+    <ul>
+        <li>
+            一个独立的worker进程，独立于当前页面进程，有独立的worker context。
+        </li>
+        <li>
+            一旦被install 就永远存在，除非被uninstall.
+        </li>
+        <li>
+            需要的时候可以直接唤醒，不需要的时候自动睡眠
+        </li>
+        <li>
+            可编程拦截代理请求和返回，缓存文件，缓存的文件可以被网页进程取到（包括离线状态）.
+        </li>
+        <li>
+            离线内容开发者可以控制
+        </li>
+        <li>
+            可以向客户端推送消息
+        </li>
+        <li>
+            不能直接操作dom
+        </li>
+        <li>
+            必须是https环境下才能工作。
+        </li>
+        <li>
+            异步实现，内部大多是Promise.
+        </li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>window对象的open方法</h1>
+    <ul>
+        <li>
+            window.open(URL,name,feature,replace) 
+        </li>
+        <li>
+            传递的是name的值，为用户定义的字符串
+        </li>
+        <li>
+            这个传递使用的方法必须是使用这个打开的新网页才可以传递
+        </li>
+        <li>
+            但是有些浏览器会在独立的进程中运行每一个标签页。当一个标签页打开另一个标签页时，如果两个window对象之间需要彼此通信，那么新的标签页就不能运行在独立的进程中。在chrome中，将新建标签页的opener设置为null(解除引用关系),即表示在单独的进程中运行新的标签页。
+        </li>
+    </ul>
+    <h1>window.showModelessDialog</h1>
+    <ul>
+        <li>
+            不兼容说个jb
+        </li>
+    </ul>
+    <h1>
+        iframe
+    </h1>
+    <ul>
+        <li>
+            如果页面中包含框架，那么每一个框架都有自己的window对象，并且保存在frames集合中。
+        </li>
+        <li>
+            Top对象始终指向最高层，即顶层浏览器。用top对窗口进行选定一般不会出现什么问题。parent对象始终指向当前框架的直接上层框架，如果在没有框架的情况下，则一定等于top。
+        </li>
+        <li>
+            父页面控制子页面 top[0].document.body.innerHTML='父-子'
+        </li>
+        <li>
+            子页面控制父页面 parent.document.getElementById('text').innerHTML=‘相互作用’
+        </li>
+        <li>
+            限制不足，灵活性不高。
+        </li>
+    </ul>
+    <h1>postMessage</h1>
+    <ul>
+        <li>
+            允许来自不同源的阿胶本采用异步的方式进行有限的通信，可以跨文档，跨窗口，跨域消息传递。
+        </li>
+        <li>
+            传递消息：window.postMessage('info','url');
+        </li>
+        <li>
+            接受消息：window.addEventListener('message',(e)=>{
+                console.log(e)
+                <!-- messageEvent类型的参数 -->
+            })
+        </li>
+        <li>
+
+        </li>
+    </ul>
+    <h1>seesion,cookie,之类的东西，状态实现</h1>
+</body>
+</html>
