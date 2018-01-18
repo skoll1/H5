@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>对于网址可寻的资源-Cache API</h1>
+    <h1>对于其他的所有数据，使用indexDB</h1>
+    <h1>其他不推荐的存储机制</h1>
+    <ul>
+        <li>
+            web storage 同步的，不支持网页工作线程，并对大小和类型（仅字符串）进行限制。
+        </li>
+        <li>
+            cookie:具有自身的用途，并且也会大小进行限制。
+        </li>
+        <li>
+            web sql:不具有广泛的浏览器支持，因此不建议使用
+        </li>
+    </ul>
+    <h1>如何了解我的应用当前使用了多少存储空间</h1>
+    <ul>
+        <li>
+            Quota Management API
+        </li>
+        <li>
+            Storage Quota Estimate API
+        </li>
+    </ul>
+    <h1>缓存逐出是如何工作的</h1>
+    <ul>
+        <li>
+            chrome 耗尽空间的时候采用LRU策略
+        </li>
+        <li>
+            firefox:在整个磁盘装满的时候采取LRU策略   
+        </li>
+        <li>
+            safair:无逐出     
+        </li>
+        <li>
+            edge:无逐出    
+         </li>
+         <li>
+            策略：“尽力而为”：在不干扰用户的情况下清除存储，但是对于长期或者关键数据而言持久性较差 indexDB，cache api  
+         </li>
+         <li>
+             策略：“持久化”：存储在存储容量降低时不会自动清除，需要用户手动清除。   
+         </li>
+         
+        
+    </ul>
+    <h1>可以使用的资源</h1>
+    <ul>
+        <li>
+            chrome <6%
+        </li>
+        <li>
+            firefox <10%
+        </li>
+        <li>
+            sfair <50mb
+        </li>
+        <li>
+            IE 10 <250mb
+        </li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <base src="http://localhost:4000">
+</head>
+<body>
+    <h1>凭证管理API</h1>
+    <p>
+        传统的登录实现方式，通过cookie存储登录信息的方式存在安全问题，需要制定一系列的校验策略和失败规则等等来确保可靠性，所以浏览器自己实现了一套凭据管理API，可以把用户的登录信息直接存储到客户端中，这些信息不会写入到cookie中，因此安全性很高
+        。同时因为账号密码直接写入本地，安全性和可靠性由浏览器保证，因此就不要额外设计token之类的机制去进行校验。
+    </p>
+    <h1>异步登录的流程</h1>
+    <ul>
+        <li>
+           也就是说这个只是改变登录信息的存储地址，日。 
+        </li>
+        <li>
+            登录信息只有在用户登录成功之后才能进行存储，这样的登录才有意义。
+        </li>
+        <li>
+            实现异步登录
+        </li>
+        <li>
+            登录成功过之后调用凭证管理api进行登录信息存储。
+        </li>
+        <li>
+            完成登录成功之后页面切换或者UI更新之类的操作
+        </li>
+    </ul>
+    <form action="/user/signin" method="POST" enctype="application/x-www-form-urlencoded" id="form">
+        <label for="name">name
+            <input type="text" placeholder="账号" id="name" name="shortName">
+        </label>
+        <label for="password">password
+            <input type="password" placeholder="输入密码" id="password" name="password">
+        </label>
+    </form>
+    <button id="put">
+        提交
+    </button>
+    <!-- 日他妈的跨域,普通的ajax提交表单 -->
+    <!-- <script>
+        var form =document.getElementById('form')
+        var put=document.getElementById('put');
+
+        put.addEventListener('click',function(){
+            var formData=new FormData(form)
+
+
+            fetch('http://localhost:4000/user/signin',{
+            method:"POST",
+            body:formData
+        })
+        .then(res=>{
+            if(res.status===200){
+                return Promise.reslove(res.data)
+            }else{
+                return Promise.reject()
+            }
+        })
+        .then(data=>{
+            console.log(data);
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }) -->
+
+    <script>
+        
+    </script>
+        
+    </script>
+</body>
+</html>

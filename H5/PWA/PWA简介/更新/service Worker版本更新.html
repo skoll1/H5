@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>版本更新sw本身发生更新</h1>
+    <p>如果sw内容有更新，当访问网站页面时浏览器获取了新的文件，逐字节对比sw.js文件不同时，他会认为有更新启动更新算法。
+        新安装的文件会触发install事件。但此时已经激活的旧的sw是会一直运行的，新的sw完成之后会进入waiting状态，直到
+        所有已打开的页面都关闭，旧的service自动停止，新的sw才会在接下来打开的页面里生效。
+    </p>
+    <h2>
+        如何立即更新所有的页面，不用等到下一次开启页面
+    </h2>
+    <ul>
+        <li>
+            install 事件中执行 self.skipWaitting()跳过waiting状态，然后直接进行入active阶段
+        </li>
+        <li>
+            手动更新策略
+        </li>
+        <li>
+            degbug更新
+        </li>
+        <li>
+            默认更新机制:除了可以由浏览器触发更新之外，还使用了特殊的缓存策略，如果该文件24小时没有更新，那么当update触发的时候会强制更新。这意味着在最坏的情况下sw会每天更新一次。
+        </li>
+    </ul>
+    <h1>sw缓存的内容发生变化</h1>
+    <ul>
+        <li>fetch请求的资源发生变化</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>问题</h1>
+    <p>
+        当网站或引用首次被加载的时候，首先需要准备大量的工作区构造引用的初始状态，然后才是使用这些信息去渲染界面。例如有的应用需要进行身份验证，之后才能进行一些api请求，最后才是将返回的数据呈现到页面中。
+        所以说，如果把应用的状态信息存储到indexDb中，可以提升频繁访问页面的加载时间。通过indexDB还能够采用失效更新策略，在后台与任何api进行同步，只有当数据更新的时候才去更新ui。
+    </p>
+    <h2>主力考虑的是indexDB对于保存状态的方法，而不是考虑如何存储其他数据</h2>
+    <ul>
+        <li>
+            写入存储失败的原因:开发者不能控制的情况
+            <ul>
+                <li>
+
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
