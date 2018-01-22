@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <meta name="theme-color" content="green">
 </head>
 <body>
     <script>
         if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
+        window.addEventListener('load', function () {
         navigator.serviceWorker.register('/sw.js', {scope: '/'})
             //指定你想让service worker控制的内容的子目录。service Worker线程将接受scope指定网域目录上所有事项的fetch 事件
 
@@ -28,6 +29,103 @@
             });
     });
 }
+    </script>
+    <script>
+        window.addEventListener('load',()=>{
+            if(!('serviceWorker' in navigator)){
+                return;
+            }
+            if(!("Pushmanager" in window)){
+                return;
+            }
+
+            let promiseChain = new Promise((reslove,reject)=>{
+                const permisseionPromise=Notification.requestPermission(result=>{
+                    reslove(result);
+                });
+
+                if(permisseionPromise){
+                    permisseionPromise.then(reslove);
+                }
+            }).then(result=>{
+                if(result==='granted'){
+                    exexute()
+                }else{
+                    console.log('no permission');
+                }
+            })
+        })
+
+        function registerServiceWorker(){
+            return navigator.serviceWorker.register('./sw.js').then(registration=>{
+                console.log('service worker successfully registered');
+                return registration;
+            })
+            .catch(err=>{
+                console.log("Unable to register service worker",err);
+            })
+        }
+
+
+        function execute(){
+            registerServiceWorker().then(registration=>{
+                registration.showNotification('hello world',{
+                    body:"这就是第一个仅仅显示标题和内容的简单通知",
+                    icon:'path/to/icon.png',
+                    // 显示通知的图标
+                    badge:'path/to/badeg.png',
+                    // 这个是给手机显示的小图标
+                    image:'path/to/image.jpg',
+                    // 显示的用户预览图
+                    actions:[
+                        {
+                            action:'coffee-action',
+                            // 每个对象的唯一ID，记录与action属性中，他会在按钮被点击时使用
+                            title:"coffee",
+                            icon:'path/to/action-1.png',
+                        },{
+                            action:'doughnut-action',
+                            title:"Doughnut",
+                            icon:'path/to/action-1.png'
+                        }
+                    ],
+                    dir:"auto",
+                    // 控制文字的方向
+                    // 为通知增加一些按钮
+
+                    vibrate:[599,110,300,100],
+                    // 震动的毫秒数，不震动的毫秒数，两个为一组，循环往复
+
+                    sound:'path/to/sound.mp3',
+                    // 使用声音进行配置，用在通知弹出时播放对应的音频文件。
+
+                    timestamp:Date.parse('01 Jan 2000 00:00:00'),
+                    // 设置定时发送通知的目的。
+                    
+                    // 默认情况下，我们每一次调用showNotification方法，就发送一条通知，每条之间都是独立的，互相展开的。因此我们可以将他们按照标签分类,也就是说当下次在发送相同标签的通知的时候，会替换上一条相同标签的信息。如果两条通知包含相同的tag，那么除了替换之外，后一条通知也不会有声音或者震动提示，如果我们需要再次有声音或者震动提示，需要使用renotify设置
+
+                    // tag:"message-group-1"
+                    // renotify:true,
+                    // 设置这属性，可以让浏览器在替换通知的时候提示声音或者震动。（聊天场景中最常见）
+
+                    // cilent:true
+                    // 在不需要用户响应
+
+                    // requireInteraction:true
+                    // 需要交互才能关闭通知，不会展现通知一段时间之后隐藏通知。
+
+
+                    data:{
+                        time:(new Date().toStrig()),
+                        message:'Hello World!'
+                        // 在sw.js中通过event.notification.data来获取这个信息
+                    }
+
+                });
+
+                
+            })
+        }
     </script>
 </body>
 </html>

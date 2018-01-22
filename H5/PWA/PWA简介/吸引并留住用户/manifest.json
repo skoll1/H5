@@ -13,10 +13,39 @@
     ],
     // 添加至主屏时，我们可以通过icons属性定义的一组不同大小的图标提供浏览器进行选择。更加详细的需要到网上去找。
     "start_url": "index.html",
-    "scope":""
+    "scope":"",
     // 对于一些大型的网站而言，有时仅仅需要对站点的某些模块进行pwa改造，其余部分任为普通的网页。因此需要通过scope限制作用域。超出部分以浏览器的方式显示。
 
     // 改善应用体验
 
     // 添加启动动画：当pwa从主屏幕点击打开的时候，幕后执行了若干操作，1.启动浏览器，启动显示页面的渲染器，加载资源。
+
+    // 设置启动背景
+    "background_color":"red",
+
+    // 设置显示类型
+    // 仅当显示类型display设置为stancalone或为fullscreen时，PWA启动时才会显示启动画面。
+    "display":"standalone",
+    // 浏览器相关ui将被隐藏
+    // minimal-ui:显示形式与上一个一样，浏览器相关ui将会最小化为一个按钮，不同的浏览器在实现上略有不同。
+    // fullsecrrn:应用的显示界面将沾满整个屏幕。
+    // browser:浏览器模式，与普通网页在浏览器中打开的显示一致。
+
+
+    // 显示应用的显示方向
+    "orientation":"any",
+
+
+    // 设置主题颜色，通过设置主题颜色可以指定PWA的主题颜色，可以通过该属性来控制浏览器UI的颜色，比如PWA启动画面上状态栏，内容页中状态栏，地址栏的颜色，会被theme_color所影响。当指定了theme_color之后地址栏依然呈现白色，需要在页面html中设置name为theme-coloe的meta标签
+
+    // 引导安装原生应用
+    "related_applications":[
+        {
+            "platform":"play",
+            // 应用平台
+            "id":"com.baidu.samples.apps.iosched"
+            // 应用id
+        }
+    ]
+
 }

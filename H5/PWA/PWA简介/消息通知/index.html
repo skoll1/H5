@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>notification</h1>
+    <h2>视觉部分</h2>
+    <ul>
+        <li>
+            标题和内容：不同的操作系统有自身的通知样式。chrome有自己的订制样式，保证在各个系统的一致性
+        </li>
+        <ul>
+            <li>
+                所有的图标使用一个相同的色系，以保证给用户带来的感官是一致的。
+            </li>
+            <li>
+                图标尺寸建议使用128*128
+            </li>
+            <li>
+                不能显示的情况下要做好应对。
+            </li>
+            <li>
+                进行支持性检测
+            </li>
+        </ul>
+    </ul>
+    <h1>行为部分</h1>
+    <ul>
+        <li>
+            所有的事件都在servece-worker里面进行注册
+        </li>
+        <li>
+            点击通知关闭：默认情况下点击通知不会有任何变化
+        </li>
+        <li>
+            点击按钮
+        </li>
+
+    </ul>
+    <h1>
+        通知事件的数据传递
+    </h1>
+    <p>
+        当执行点击通知时进行一些动态操作，例如跳往某个URL,那么这个动态信息需要从主程序传递到
+    </p>
+    <h1>常用实现</h1>
+    <ul>
+        <li>
+            当用户浏览页面的时候不要发送通知，这个时候我们可以发送不是那么重的通知，使用postMessage向页面发送通知。
+        </li>
+        <li>
+            
+        </li>
+    </ul>
+</body>
+</html>

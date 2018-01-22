@@ -57,3 +57,73 @@ this.addEventListener('fetch',function(event){
 // 你可以在install的时候进行静态资源缓存，也可以通过fetch事件处理回调来代理页面请求从而实现动态资源缓存。
 
 // 由此看来，除了静态的页面和文件之外，如果对ajax数据加以适当的缓存，那么就可以实现真正的离线可用，要达到这一点，可能需要对既有的web app进行重构以分离数据和模板。
+
+
+
+// 获取通知事件并处理
+this.addEventListener('notificationclick',event=>{
+    let clickedNotification=event.notification;
+    clickedNotification.close()
+
+    // 执行某些异步操作时，等待他完成
+    let promiseChain=doSomething();
+    event.waitUntil(promiseChain);
+
+    // 处理标签点击
+    if(!event.action){
+        console.log('没有通知被点击')
+        return ;
+    }
+
+    swicth (event.action) {
+        case 'coffee-action':
+            console.log('User \'s coffee');
+        break;
+        case 'doughut-action':
+            console.log('User\'s doughnuts');
+    }
+
+
+    // 处理点击打开页面的情况
+    let examplePage="/demos/notification-examples/example-page.html"
+    let promiseChain=clients.openWindow(examplePage);
+    event.waitUntil(promiseChain);
+
+    // 如果页面已经被打开，那么更好的做法通常不是再次打开，而是激活那个窗口
+
+    // 注意：我们只能记过在自己域的页面。原因是我们只能知道属于自己的域的哪些页面被打开，但是不能知道其余的哪些页面被打开。
+
+    let urlOpen=new URL(examplePage,self.location.origin).href;
+    // 将页面从字符串转为URL类型
+
+    // 获取已经打开的所有窗口，这里的窗口只包含开发者自己域下的。
+
+    let promiseChain=clients.matchAll({
+        type:'window',
+        includeUncontrolled:true
+    }).then(windowClients=>{
+        let matchingClients=null;
+
+        for(let i =0,max=windowClients.length;i<max;i++){
+            let windowClient=windowClients[i];
+
+            if(windowClient.url===urlOpen){
+                matchingClient=windowClient;
+                break;
+            }
+        }
+        // 逐个匹配寻找，找到了就激活那个窗口，没有找到就打开新窗口。
+
+        return matchingClient?matchingClient.focus():clients.openWindow(urlOpen);
+    });
+    event.waitUntil(promiseChain);
+})
+
+// 通知关闭事件：在用户关闭通知时触发，统计通知时长，评估通知效果等。
+this.addEventListener('notificationclose',event=>{
+    let dismissedNotification=event.notification;
+    let promiseChain=notificationCloseAndlytics();
+
+    event.waitUntil(promiseChain);
+})
+

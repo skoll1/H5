@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>传统的记住密码功能实现</h1>
+    <h2>cookie存储登录页信息</h2>
+    <ul>
+        <li>
+           常用做法是，当用户登录成功时，服务端为用户生成一个token，并且写入cookie，然后利用这个token作为用户的标识符，供用户直接使用Token进行登录。值得注意的是，token需要一系列的校验策略和失效策略来确保token的可靠性。
+        </li>
+    </ul>
+    <h2>浏览器的自动填充登录功能</h2>
+    <ul>
+        <li>浏览器会自动对网页的文本框和表单信息进行自动记录，特别的，当表单中存在输入类型为password的输入框时，会触发浏览器的记住账号密码提示。</li>
+        <li>
+            事实上：浏览器会自动获取type=‘password’的输入框，以及这个这个输入框最近一个type=‘text’的输入框内容，分别作为登录信息的密码和账号进行存储
+        </li>
+    </ul>
+</body>
+</html>
